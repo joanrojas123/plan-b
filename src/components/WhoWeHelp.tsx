@@ -4,68 +4,70 @@ import { motion } from "framer-motion";
 
 const industries = [
   {
-    name: "E‑commerce & Retail omnicanal",
+    tag: "E-commerce & Retail",
+    title: "Operaciones omnicanal que necesitan unificarse",
     detail:
-      "Operaciones con múltiples canales (tienda online, marketplaces, retail físico) que necesitan unificar stock, fulfillment y postventa.",
-    hint: "Órdenes que se pierden entre sistemas, promesas de entrega que no se cumplen.",
+      "Multiples canales — tienda online, marketplaces, retail fisico — con stock, fulfillment y postventa desconectados.",
+    pain: "Ordenes perdidas entre sistemas. Promesas de entrega que no se cumplen.",
   },
   {
-    name: "SaaS B2B en expansión",
+    tag: "SaaS B2B",
+    title: "Equipos que crecieron rapido y operan desalineados",
     detail:
-      "Equipos de Customer Success, Implementación y Soporte que crecieron rápido y hoy operan con procesos desalineados.",
-    hint: "Onboardings lentos, churn evitable y equipos siempre al límite.",
+      "Customer Success, Implementacion y Soporte que escalan sin procesos claros ni metricas compartidas.",
+    pain: "Onboardings lentos, churn evitable, equipos siempre al limite.",
   },
   {
-    name: "Operaciones intensivas en servicio",
+    tag: "Operaciones intensivas",
+    title: "Servicios donde la operacion define la marca",
     detail:
-      "Logística, servicios profesionales, fintechs y compañías donde la experiencia operacional define la marca.",
-    hint: "Muchas manos tocando el mismo caso y poca visibilidad end‑to‑end.",
+      "Logistica, profesionales, fintechs: muchas manos tocando el mismo caso y poca visibilidad end-to-end.",
+    pain: "Sin visibilidad en tiempo real. Errores que llegan tarde.",
   },
 ];
 
 export default function WhoWeHelp() {
   return (
-    <section id="industrias" className="space-y-6">
+    <section id="industrias" className="py-16 md:py-24">
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.6 }}
+        viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.6 }}
-        className="space-y-3"
+        className="mb-14"
       >
-        <p className="text-xs font-medium uppercase tracking-[0.16em] text-[#7C3AED]">
-          A quiénes ayudamos
+        <p className="mb-4 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-[#2563EB]">
+          Para quien
         </p>
-        <h2 className="text-2xl font-bold text-white md:text-3xl">
-          No partimos de teoría, sino de operaciones reales.
+        <h2 className="font-display max-w-2xl text-4xl font-normal leading-[1.15] text-white md:text-5xl">
+          No partimos de teoria,{" "}
+          <em className="font-display italic text-zinc-400">
+            sino de operaciones reales.
+          </em>
         </h2>
-        <p className="max-w-2xl text-sm text-zinc-400 md:text-base">
-          Trabajamos mejor con compañías que ya superaron el product‑market
-          fit, tienen equipos operativos formados y buscan ordenar la casa para
-          el siguiente salto.
-        </p>
       </motion.div>
 
-      <div className="grid gap-4 md:grid-cols-3">
-        {industries.map((industry, index) => (
+      <div className="grid gap-5 md:grid-cols-3">
+        {industries.map((ind, index) => (
           <motion.div
-            key={industry.name}
-            initial={{ opacity: 0, y: 20 }}
+            key={ind.tag}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.5, delay: index * 0.08 }}
-            className="flex flex-col justify-between rounded-2xl border border-white/10 bg-zinc-950/60 p-4"
+            className="flex flex-col rounded-xl border border-white/[0.08] bg-white/[0.02] p-6"
           >
-            <div className="space-y-2">
-              <h3 className="text-sm font-semibold text-white md:text-base">
-                {industry.name}
-              </h3>
-              <p className="text-xs text-zinc-400 md:text-sm">
-                {industry.detail}
-              </p>
-            </div>
-            <p className="mt-3 text-[0.7rem] text-zinc-500">
-              {industry.hint}
+            <span className="mb-5 inline-block rounded-full border border-[#2563EB]/30 bg-[#2563EB]/10 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.12em] text-[#2563EB]">
+              {ind.tag}
+            </span>
+            <h3 className="mb-3 text-base font-medium leading-snug text-white">
+              {ind.title}
+            </h3>
+            <p className="mb-5 flex-1 text-sm leading-relaxed text-zinc-500">
+              {ind.detail}
+            </p>
+            <p className="border-t border-white/[0.06] pt-4 text-xs leading-relaxed text-zinc-600">
+              {ind.pain}
             </p>
           </motion.div>
         ))}
@@ -73,4 +75,3 @@ export default function WhoWeHelp() {
     </section>
   );
 }
-

@@ -4,96 +4,80 @@ import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 const KPIS = [
-  { label: "reduccion promedio en tiempo de ciclo", value: -32, suffix: "%" },
   {
-    label: "incremento en capacidad sin sumar headcount",
-    value: 48,
-    suffix: "%",
-    prefix: "+",
+    label: "reduccion en tiempo de ciclo",
+    value: 32,
+    display: "-32%",
+    color: "#2563EB",
   },
   {
-    label: "disminucion de tickets urgentes en 3 meses",
-    value: -65,
-    suffix: "%",
+    label: "mas capacidad sin sumar headcount",
+    value: 48,
+    display: "+48%",
+    color: "#ffffff",
+  },
+  {
+    label: "menos tickets urgentes en 90 dias",
+    value: 65,
+    display: "-65%",
+    color: "#2563EB",
   },
 ];
 
-function AnimatedNumber({
-  value,
-  suffix,
-  prefix,
-}: {
-  value: number;
-  suffix: string;
-  prefix?: string;
-}) {
-  const [display, setDisplay] = useState(0);
+function Counter({ value, display }: { value: number; display: string }) {
+  const [count, setCount] = useState(0);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
+  const prefix = display.startsWith("-") ? "-" : "+";
+  const suffix = "%";
 
   useEffect(() => {
     if (!inView) return;
-    const abs = Math.abs(value);
-    const duration = 1800;
-    const steps = 60;
-    const increment = abs / steps;
-    let current = 0;
+    const steps = 50;
+    const duration = 1600;
+    let step = 0;
     const timer = setInterval(() => {
-      current += increment;
-      if (current >= abs) {
-        setDisplay(abs);
+      step++;
+      const progress = step / steps;
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * value));
+      if (step >= steps) {
+        setCount(value);
         clearInterval(timer);
-        return;
       }
-      setDisplay(Math.floor(current));
     }, duration / steps);
     return () => clearInterval(timer);
   }, [inView, value]);
 
-  const sign = value < 0 ? "-" : prefix ?? "";
   return (
     <span ref={ref}>
-      {sign}
-      {display}
-      {suffix}
+      {prefix}{count}{suffix}
     </span>
   );
 }
 
 export default function NumbersSection() {
   return (
-    <section id="numeros" className="space-y-6">
-      <motion.p
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 0.6 }}
-        className="text-xs font-medium uppercase tracking-[0.16em] text-zinc-500"
-      >
-        Lo que cambia cuando la operacion deja de ser un cuello de botella
-      </motion.p>
-
-      <div className="grid gap-4 md:grid-cols-3">
+    <section id="numeros" className="border-y border-white/[0.06] py-16 md:py-20">
+      <div className="grid gap-px md:grid-cols-3">
         {KPIS.map((kpi, index) => (
           <motion.div
             key={kpi.label}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
-            className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 via-white/0 to-white/5 p-6"
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="flex flex-col gap-3 px-8 py-4 first:pl-0 last:pr-0 md:border-l md:border-white/[0.06] md:first:border-l-0"
           >
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#3B82F6]/15 via-transparent to-[#7C3AED]/15" />
-            <div className="relative space-y-2">
-              <div className="text-5xl font-bold tracking-tight text-white md:text-6xl">
-                <AnimatedNumber
-                  value={kpi.value}
-                  suffix={kpi.suffix}
-                  prefix={kpi.prefix}
-                />
-              </div>
-              <p className="text-xs text-zinc-400">{kpi.label}</p>
+            <div
+              className="font-display text-6xl font-normal md:text-7xl"
+              style={{ color: kpi.color }}
+            >
+              <Counter value={kpi.value} display={kpi.display} />
             </div>
+            <p className="max-w-[180px] text-sm leading-snug text-zinc-500">
+              {kpi.label}
+            </p>
           </motion.div>
         ))}
       </div>

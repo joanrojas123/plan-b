@@ -1,16 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 
 const links = [
-  { href: "#numeros", label: "Números" },
-  { href: "#dolores", label: "Pain points" },
-  { href: "#industrias", label: "A quiénes ayudamos" },
-  { href: "#metodologia", label: "Metodología" },
-  { href: "#stack", label: "Stack tecnológico" },
+  { href: "#numeros", label: "Resultados" },
+  { href: "#dolores", label: "El problema" },
+  { href: "#industrias", label: "Para quien" },
+  { href: "#metodologia", label: "Metodologia" },
   { href: "#contacto", label: "Contacto" },
 ];
 
@@ -21,28 +19,25 @@ export default function Navbar() {
     <motion.header
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed inset-x-0 top-0 z-30 border-b border-white/5 bg-[#050509]/80 backdrop-blur-xl"
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="fixed inset-x-0 top-0 z-30 border-b border-white/[0.06] bg-[#080808]/90 backdrop-blur-xl"
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6 lg:px-8">
-        <a href="#top" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-[#3B82F6] to-[#7C3AED] shadow-lg shadow-blue-500/40" />
-          <div className="flex flex-col leading-tight">
-            <span className="text-sm font-semibold tracking-[0.18em] text-zinc-400">
-              PLAN B
-            </span>
-            <span className="text-xs text-zinc-500">
-              Ingeniería de Operaciones
-            </span>
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
+        <a href="#top" className="flex items-center gap-3">
+          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[#2563EB]">
+            <span className="text-[0.6rem] font-bold tracking-widest text-white">PB</span>
           </div>
+          <span className="text-sm font-medium tracking-wide text-white">
+            Plan B
+          </span>
         </a>
 
-        <nav className="hidden items-center gap-6 text-sm text-zinc-300 md:flex">
+        <nav className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="transition-colors hover:text-white"
+              className="text-[0.8rem] text-zinc-400 transition-colors hover:text-white"
             >
               {link.label}
             </a>
@@ -50,44 +45,48 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:block">
-          <Button
-            asChild
-            className="rounded-full bg-gradient-to-r from-[#3B82F6] to-[#7C3AED] px-5 py-2 text-xs font-semibold shadow-lg shadow-blue-500/40"
+          <a
+            href="#contacto"
+            className="inline-flex h-9 items-center rounded-full border border-white/10 bg-white/5 px-5 text-[0.8rem] font-medium text-white transition-all hover:border-[#2563EB]/60 hover:bg-[#2563EB]/10"
           >
-            <a href="#contacto">Agendar diagnóstico</a>
-          </Button>
+            Agendar diagnostico
+          </a>
         </div>
 
         <button
-          className="inline-flex items-center justify-center rounded-full border border-white/10 p-2 text-zinc-200 md:hidden"
+          className="flex items-center justify-center rounded-md p-1.5 text-zinc-400 hover:text-white md:hidden"
           onClick={() => setOpen((v) => !v)}
-          aria-label="Abrir menú"
         >
-          <Menu className="h-4 w-4" />
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-white/5 bg-[#050509]/95 px-4 pb-4 pt-2 md:hidden">
-          <nav className="flex flex-col gap-2 text-sm text-zinc-300">
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="border-t border-white/[0.06] bg-[#080808]/98 px-5 pb-5 pt-3 md:hidden"
+        >
+          <nav className="flex flex-col gap-1">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-2 py-2 hover:bg-white/5"
+                className="rounded-lg px-3 py-2.5 text-sm text-zinc-300 hover:bg-white/5 hover:text-white"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
               </a>
             ))}
-            <Button
-              asChild
-              className="mt-2 w-full rounded-full bg-gradient-to-r from-[#3B82F6] to-[#7C3AED] text-xs font-semibold shadow-lg shadow-blue-500/40"
+            <a
+              href="#contacto"
+              className="mt-3 flex h-10 items-center justify-center rounded-full bg-[#2563EB] text-sm font-medium text-white"
+              onClick={() => setOpen(false)}
             >
-              <a href="#contacto">Agendar diagnóstico</a>
-            </Button>
+              Agendar diagnostico
+            </a>
           </nav>
-        </div>
+        </motion.div>
       )}
     </motion.header>
   );

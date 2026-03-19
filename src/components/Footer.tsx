@@ -5,33 +5,25 @@ import { motion } from "framer-motion";
 export default function Footer() {
   return (
     <motion.footer
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="border-t border-white/5 bg-black/40"
+      className="border-t border-white/[0.06]"
     >
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-5 text-xs text-zinc-500 md:flex-row md:items-center md:justify-between md:px-6 lg:px-8">
-        <div className="flex items-center gap-2 text-[0.7rem] md:text-xs">
-          <span className="font-semibold tracking-[0.18em] text-zinc-400">
-            PLAN B
-          </span>
-          <span className="text-zinc-500">
-            Consultoría de ingeniería de operaciones.
-          </span>
-        </div>
-        <div className="flex flex-wrap items-center gap-3 text-[0.7rem] md:text-xs">
-          <span className="text-zinc-500">
-            © {new Date().getFullYear()} Plan B. Todos los derechos reservados.
-          </span>
-          <span className="hidden h-1 w-1 rounded-full bg-zinc-600 md:inline-block" />
-          <span className="text-zinc-500">
-            Hecho para equipos que quieren pasar del modo bombero al modo
-            sistema.
+      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-8 md:flex-row md:items-center md:justify-between md:px-8">
+        <div className="flex items-center gap-3">
+          <div className="flex h-6 w-6 items-center justify-center rounded-md bg-[#2563EB]">
+            <span className="text-[0.5rem] font-bold tracking-widest text-white">PB</span>
+          </div>
+          <span className="text-xs text-zinc-500">
+            Plan B — Consultoria de ingenieria de operaciones
           </span>
         </div>
+        <span className="text-xs text-zinc-600">
+          {new Date().getFullYear()} · Para equipos que quieren pasar del modo bombero al modo sistema.
+        </span>
       </div>
     </motion.footer>
   );
 }
-

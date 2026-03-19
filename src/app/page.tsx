@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import DashboardSeparator from "@/components/DashboardSeparator";
 import Hero from "@/components/Hero";
 import NumbersSection from "@/components/NumbersSection";
 import PainPoints from "@/components/PainPoints";
@@ -11,11 +10,10 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0A0A0F] text-zinc-100">
+    <div className="min-h-screen bg-[#080808] text-zinc-100">
       <Navbar />
-      <main className="mx-auto flex max-w-6xl flex-col gap-20 px-4 pb-20 pt-24 md:gap-28 md:px-6 lg:px-8">
+      <main className="mx-auto max-w-6xl px-5 pt-24 md:px-8">
         <Hero />
-        <DashboardSeparator />
         <NumbersSection />
         <PainPoints />
         <WhoWeHelp />
