@@ -6,26 +6,22 @@ const painPoints = [
   {
     number: "01",
     title: "La operacion vive en la cabeza de unas pocas personas",
-    description:
-      "No hay documentacion clara. Los procesos se sostienen por memoria y buena voluntad. Cuando alguien clave se va de vacaciones, todo se resiente.",
+    description: "No hay documentacion clara. Los procesos se sostienen por memoria y buena voluntad. Cuando alguien clave se va de vacaciones, todo se resiente.",
   },
   {
     number: "02",
     title: "Siempre apagando incendios",
-    description:
-      "Los lideres dedican mas tiempo a resolver urgencias que a mejorar la operacion. Los proyectos de fondo nunca avanzan.",
+    description: "Los lideres dedican mas tiempo a resolver urgencias que a mejorar la operacion. Los proyectos de fondo nunca avanzan.",
   },
   {
     number: "03",
     title: "Sistemas que no conversan entre si",
-    description:
-      "Excel, WhatsApp, Slack y el ERP conviven pero no se integran. Se duplican tareas y se pierden datos criticos.",
+    description: "Excel, WhatsApp, Slack y el ERP conviven pero no se integran. Se duplican tareas y se pierden datos criticos.",
   },
   {
     number: "04",
     title: "Dificil saber que mejorar primero",
-    description:
-      "Muchos cuellos de botella, poco foco. Falta un mapa claro de prioridades y un roadmap alineado al negocio.",
+    description: "Muchos cuellos de botella, poco foco. Falta un mapa claro de prioridades y un roadmap alineado al negocio.",
   },
 ];
 
@@ -48,7 +44,7 @@ export default function PainPoints() {
         </h2>
       </motion.div>
 
-      <div className="grid gap-0 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2">
         {painPoints.map((pain, index) => (
           <motion.div
             key={pain.title}
@@ -56,17 +52,16 @@ export default function PainPoints() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.5, delay: index * 0.07 }}
-            className="group border-b border-white/[0.06] py-8 md:border-r md:border-white/[0.06] md:px-8 md:odd:border-r md:odd:pl-0 md:even:pr-0"
+            whileHover={{ y: -4 }}
+            className="group rounded-xl border border-white/[0.08] bg-white/[0.02] p-6 transition-all hover:border-white/[0.15] hover:bg-white/[0.04]"
           >
-            <span className="mb-4 block text-[0.7rem] font-medium tabular-nums tracking-[0.16em] text-zinc-600">
+            <span className="mb-4 block text-[0.65rem] font-medium tabular-nums tracking-[0.16em] text-zinc-600">
               {pain.number}
             </span>
-            <h3 className="mb-3 text-base font-medium text-white md:text-lg">
+            <h3 className="mb-3 text-base font-medium leading-snug text-white">
               {pain.title}
             </h3>
-            <p className="text-sm leading-relaxed text-zinc-500">
-              {pain.description}
-            </p>
+            <p className="text-sm leading-relaxed text-zinc-500">{pain.description}</p>
           </motion.div>
         ))}
       </div>

@@ -3,80 +3,84 @@
 import { motion } from "framer-motion";
 
 const steps = [
-  {
-    week: "Sem. 1-2",
-    title: "Diagnostico en profundidad",
-    description:
-      "Entrevistas con equipos clave, analisis de datos operativos y mapeo de procesos end-to-end para entender que frena hoy el crecimiento.",
-  },
-  {
-    week: "Sem. 3-4",
-    title: "Mapa de cuellos de botella",
-    description:
-      "Identificamos donde se pierden tiempos, calidad o margen. Priorizamos por impacto en negocio, esfuerzo e interdependencias.",
-  },
-  {
-    week: "Sem. 5-8",
-    title: "Diseno de la nueva operacion",
-    description:
-      "Definimos procesos, gobernanza, metricas y responsabilidades claras. Alineamos herramientas y definimos mejoras tecnologicas.",
-  },
-  {
-    week: "Sem. 9-12",
-    title: "Acompanamiento en la implementacion",
-    description:
-      "Trabajamos con tu equipo en sprints cortos, medimos avances y ajustamos. Dejamos tableros y rituales para sostener la mejora continua.",
-  },
+  { num: "01", week: "Sem. 1-2", title: "Diagnostico", desc: "Entrevistas, datos operativos y mapeo de procesos. Entendemos exactamente donde se pierden tiempo, calidad y margen." },
+  { num: "02", week: "Sem. 3-4", title: "Priorizacion", desc: "Un mapa claro de donde intervenir primero. Ordenado por impacto real en el negocio, no por lo que se ve mas urgente." },
+  { num: "03", week: "Sem. 5-8", title: "Diseno del sistema", desc: "Procesos, metricas, responsabilidades y herramientas. Todo documentado y validado con tu equipo antes de implementar." },
+  { num: "04", week: "Sem. 9-12", title: "Implementacion", desc: "Sprints cortos con tu equipo. Medimos, ajustamos y transferimos el sistema para que funcione sin nosotros." },
 ];
 
 export default function MethodologyTimeline() {
   return (
-    <section id="metodologia" className="py-16 md:py-24">
+    <section id="metodologia" className="py-20 md:py-28">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.6 }}
-        className="mb-14"
+        transition={{ duration: 0.5 }}
+        className="mb-4 flex items-center gap-3"
       >
-        <p className="mb-4 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-[#2563EB]">
-          Metodologia
-        </p>
-        <h2 className="font-display max-w-2xl text-4xl font-normal leading-[1.15] text-white md:text-5xl">
-          Un sistema en 90 dias,{" "}
-          <em className="font-display italic text-zinc-400">
-            no un PowerPoint.
-          </em>
+        <span className="font-mono text-[0.65rem] text-zinc-600">3.0</span>
+        <span className="text-[0.65rem] font-medium uppercase tracking-[0.16em] text-zinc-600">Metodologia</span>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.6 }}
+        className="mb-3"
+      >
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#5B6EF5]/25 bg-[#5B6EF5]/8 px-3 py-1">
+          <span className="text-xs font-medium text-[#5B6EF5]">Sistema SDO — 90 dias</span>
+        </div>
+        <h2 className="font-display max-w-2xl text-4xl font-normal leading-[1.12] text-white md:text-5xl">
+          Un sistema instalado en tu empresa.{" "}
+          <em className="font-display italic text-zinc-500">No un informe que se archiva.</em>
         </h2>
       </motion.div>
 
-      <div className="grid gap-0 md:grid-cols-4">
-        {steps.map((step, index) => (
-          <motion.div
-            key={step.title}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
-            className="relative border-b border-white/[0.06] pb-8 pt-6 md:border-b-0 md:border-l md:border-white/[0.06] md:px-6 md:first:border-l-0 md:first:pl-0"
-          >
-            <div className="mb-1 flex items-center gap-3">
-              <span className="text-[0.65rem] font-medium tabular-nums tracking-[0.14em] text-zinc-600">
-                {step.week}
-              </span>
-              <div className="hidden h-px flex-1 bg-white/[0.06] md:block" />
-            </div>
-            <div className="mb-1 text-2xl font-light text-zinc-700 md:text-3xl">
-              0{index + 1}
-            </div>
-            <h3 className="mb-3 text-sm font-medium text-white md:text-base">
-              {step.title}
-            </h3>
-            <p className="text-xs leading-relaxed text-zinc-500 md:text-sm">
-              {step.description}
-            </p>
-          </motion.div>
-        ))}
+      <p className="mb-12 max-w-xl text-sm text-zinc-600 md:text-base">
+        Trabajamos junto a tu equipo para que el sistema quede en sus manos. No dependes de nosotros cuando terminamos.
+      </p>
+
+      {/* Visual timeline */}
+      <div className="relative overflow-hidden rounded-xl border border-white/[0.08] bg-[#111111]">
+        {/* Progress bar top */}
+        <div className="border-b border-white/[0.06] p-4">
+          <div className="mb-2 flex items-center justify-between text-xs text-zinc-600">
+            <span>Progreso del engagement</span>
+            <span>Semana 1 — 12</span>
+          </div>
+          <div className="h-1 w-full overflow-hidden rounded-full bg-white/5">
+            <motion.div
+              className="h-full rounded-full bg-[#5B6EF5]"
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              viewport={{ once: true }}
+              transition={{ duration: 2, ease: "easeInOut" }}
+            />
+          </div>
+        </div>
+
+        <div className="grid gap-px bg-white/[0.04] md:grid-cols-4">
+          {steps.map((step, i) => (
+            <motion.div
+              key={step.num}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="flex flex-col bg-[#111111] p-5"
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <span className="font-mono text-2xl font-light text-zinc-800">{step.num}</span>
+                <span className="rounded-full bg-white/[0.04] px-2 py-0.5 text-[0.6rem] text-zinc-600">{step.week}</span>
+              </div>
+              <h3 className="mb-2 text-sm font-medium text-white">{step.title}</h3>
+              <p className="text-xs leading-relaxed text-zinc-600">{step.desc}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
